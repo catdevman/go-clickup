@@ -36,3 +36,7 @@ func NewClient(httpClient *http.Client) (*Client, error) {
 func (c *Client) SetHeader(key string, value string) {
 	c.headers[key] = value
 }
+
+func (c *Client) SetCredential(pk string) {
+	c.credential = pk
+}

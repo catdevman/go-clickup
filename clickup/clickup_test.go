@@ -18,3 +18,12 @@ func TestSetHeader(t *testing.T) {
 		t.Fatal("Header1 is wrong")
 	}
 }
+
+func TestSetCredential(t *testing.T) {
+	client, _ := NewClient(nil)
+	client.SetCredential("pk_test")
+
+	if client.credential != "pk_test" {
+		t.Fatal("client.credential returns wrong key: " + client.credential)
+	}
+}
