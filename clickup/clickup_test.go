@@ -153,3 +153,33 @@ func TestGetFailure(t *testing.T) {
 		t.Fatalf("Did not return a clickup error %s", err)
 	}
 }
+
+func TestPost(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "team.json", http.StatusCreated)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+	type team struct{}
+	body, err := client.post(ctx, "/team", team{})
+	if err != nil {
+		t.Fatalf("Failed to send request: %s", err)
+	}
+
+	if len(body) == 0 {
+		t.Fatal("Response body is empty")
+	}
+}
+
+func TestPostFailure(t *testing.T) {
+	mockAPI := newMockAPIWithStatus(http.MethodPost, "team.json", http.StatusInternalServerError)
+	client := newTestClient(mockAPI)
+	defer mockAPI.Close()
+	type team struct{}
+	_, err := client.post(ctx, "/team", team{})
+	if err == nil {
+		t.Fatal("Did not receive error from client")
+	}
+
+	if _, ok := err.(Error); !ok {
+		t.Fatalf("Did not return a zendesk error %s", err)
+	}
+}
