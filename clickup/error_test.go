@@ -2,6 +2,7 @@ package clickup
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"testing"
 )
@@ -35,6 +36,28 @@ func TestError_ErrorEmptyBody(t *testing.T) {
 	expected := fmt.Sprintf("%d: %s", status, http.StatusText(status))
 	if v := err.Error(); v != expected {
 		t.Fatalf("Error %s did not have expected value %s", v, expected)
+	}
+}
+
+func TestError_Body(t *testing.T) {
+
+	status := http.StatusOK
+	resp := &http.Response{
+		StatusCode: status,
+	}
+	err := Error{
+		body: []byte(string("error")),
+		resp: resp,
+	}
+
+	body := err.Body()
+	defer body.Close()
+	b, e := io.ReadAll(body)
+	if e != nil {
+		t.Fatal("Reading body caused error:", err)
+	}
+	if string(b) != "error" {
+		t.Fatal("Body does not contain the correct value")
 	}
 }
 
