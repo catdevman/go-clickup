@@ -2,7 +2,7 @@ package clickup
 
 import (
 	"fmt"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"testing"
 )
@@ -52,7 +52,7 @@ func TestError_Body(t *testing.T) {
 
 	body := err.Body()
 	defer body.Close()
-	b, e := io.ReadAll(body)
+	b, e := ioutil.ReadAll(body)
 	if e != nil {
 		t.Fatal("Reading body caused error:", err)
 	}
