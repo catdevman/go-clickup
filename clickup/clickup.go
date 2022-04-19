@@ -130,3 +130,15 @@ func (c *Client) post(ctx context.Context, path string, data interface{}) ([]byt
 
 	return body, nil
 }
+
+// SetEndpointURL replace full URL of endpoint without subdomain validation.
+// This is mainly used for testing to point to mock API server.
+func (c *Client) SetEndpointURL(newURL string) error {
+	baseURL, err := url.Parse(newURL)
+	if err != nil {
+		return err
+	}
+
+	c.baseURL = baseURL
+	return nil
+}

@@ -1,0 +1,35 @@
+{
+    "teams": [
+        {
+            "id": "8591733",
+            "name": "Trek10 Workspace",
+            "color": "#ff5722",
+            "avatar": null,
+            "members": [
+                {
+                    "user": {
+                        "id": 48284288,
+                        "username": "Annie Holley",
+                        "email": "aholley@trek10.com",
+                        "color": "#5d4037",
+                        "profilePicture": null,
+                        "initials": "AH",
+                        "role": 3,
+                        "custom_role": null,
+                        "last_active": "1650318879633",
+                        "date_joined": "1649871483981",
+                        "date_invited": "1649871375665"
+                    },
+                    "invited_by": {
+                        "id": 12862325,
+                        "username": "Mitchell Bryant",
+                        "color": "#02bcd4",
+                        "email": "mbryant@trek10.com",
+                        "initials": "MB",
+                        "profilePicture": null
+                    }
+                }
+            ]
+        }
+    ]
+}
