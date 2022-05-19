@@ -24,7 +24,7 @@ func main() {
 
 	client := clickup.NewClient(tc)
 
-	user, resp, err := client.Users.Get(ctx, "")
+	workspaces, resp, err := client.Workspaces.Get(ctx)
 	if err != nil {
 		fmt.Printf("\nerror: %v\n", err)
 		return
