@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"syscall"
 
-	clickup "github.com/catdevman/go-clickup/v1"
+	"github.com/catdevman/go-clickup/clickup"
 	"golang.org/x/crypto/ssh/terminal"
 	"golang.org/x/oauth2"
 )
@@ -22,12 +22,14 @@ func main() {
 	)
 	tc := oauth2.NewClient(ctx, ts)
 
-	client := clickup.NewClient(tc)
+	client, _ := clickup.NewClient(tc)
 
 	workspaces, resp, err := client.Workspaces.Get(ctx)
 	if err != nil {
 		fmt.Printf("\nerror: %v\n", err)
 		return
 	}
+
+	fmt.Println(workspaces, resp)
 
 }
