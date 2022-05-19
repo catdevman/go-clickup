@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"syscall"
 
-	"github.com/catdevman/go-clickup/v1/clickup"
+	clickup "github.com/catdevman/go-clickup/v1"
 	"golang.org/x/crypto/ssh/terminal"
 	"golang.org/x/oauth2"
 )

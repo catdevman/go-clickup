@@ -16,7 +16,6 @@ import (
 	"reflect"
 	"strings"
 	"sync"
-	"time"
 
 	"github.com/google/go-querystring/query"
 )
@@ -371,9 +370,7 @@ type RateLimitError struct {
 }
 
 func (r *RateLimitError) Error() string {
-	return fmt.Sprintf("%v %v: %d %v %v",
-		r.Response.Request.Method, sanitizeURL(r.Response.Request.URL),
-		r.Response.StatusCode, r.Message, formatRateReset(time.Until(r.Rate.Reset.Time)))
+	return "rate limited"
 }
 
 // Is returns whether the provided error equals this error.
