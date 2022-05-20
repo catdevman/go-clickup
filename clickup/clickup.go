@@ -21,7 +21,7 @@ import (
 )
 
 const (
-	defaultBaseURL = "https://api.clickup.com/v2/"
+	defaultBaseURL = "https://api.clickup.com/api/v2/"
 	userAgent      = "go-clickup"
 
 	headerRateLimit     = "X-RateLimit-Limit"
