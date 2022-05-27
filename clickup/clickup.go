@@ -50,6 +50,10 @@ type Client struct {
 
 	// Services used for talking to different parts of the ClickUp API.
 	Workspaces *WorkspacesService
+	Spaces     *SpacesService
+	Folders    *FoldersService
+	Lists      *ListsService
+	Tasks      *TasksService
 }
 
 type service struct {
@@ -115,6 +119,10 @@ func NewClient(httpClient *http.Client) *Client {
 	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
 	c.common.client = c
 	c.Workspaces = (*WorkspacesService)(&c.common)
+	c.Spaces = (*SpacesService)(&c.common)
+	c.Folders = (*FoldersService)(&c.common)
+	c.Lists = (*ListsService)(&c.common)
+	c.Tasks = (*TasksService)(&c.common)
 	return c
 }
 
