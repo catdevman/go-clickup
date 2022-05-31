@@ -52,6 +52,65 @@ type List struct {
 	PermissionLevel string `json:"permission_level"`
 }
 
+type ListMembersWrapper struct {
+	Members []ListMember `json:"members"`
+}
+
+type ListMember struct {
+	ID             int64  `json:"id"`
+	Username       string `json:"username"`
+	Email          string `json:"email"`
+	Color          string `json:"color"`
+	Initials       string `json:"initials"`
+	ProfilePicture string `json:"profilePicture"`
+	ProfileInfo    struct {
+		DisplayProfile           bool `json:"display_profile"`
+		VerifiedAmbassador       bool `json:"verified_ambassador"`
+		VerifiedConsultant       bool `json:"verified_consultant"`
+		TopTierUser              bool `json:"top_tier_user"`
+		ViewedVerifiedEmbassador bool `json:"viewed_verified_embassador"`
+		ViewedVerifiedConsultant bool `json:"viewed_verified_consultant"`
+		ViewedTopTierUser        bool `json:"viewed_top_tier_user"`
+	} `json:"profileInfo"`
+}
+
+type ListCommentsWrapper struct {
+	Comments []ListComment `json:"comments"`
+}
+
+type ListComment struct {
+	ID          string              `json:"id"`
+	Comment     []map[string]string `json:"comment"`
+	CommentText string              `json:"comment_text"`
+	User        struct {
+		ID             int64  `json:"id"`
+		Username       string `json:"username"`
+		Initials       string `json:"initials"`
+		Email          string `json:"email"`
+		Color          string `json:"color"`
+		ProfilePicture string `json:"profilePicture"`
+	} `json:"user"`
+	Resolved bool `json:"resolved"`
+	Assignee struct {
+		ID             int64  `json:"id"`
+		Username       string `json:"username"`
+		Initials       string `json:"initials"`
+		Email          string `json:"email"`
+		Color          string `json:"color"`
+		ProfilePicture string `json:"profilePicture"`
+	} `json:"assignee"`
+	AssignedBy struct {
+		ID             int64  `json:"id"`
+		Username       string `json:"username"`
+		Initials       string `json:"initials"`
+		Email          string `json:"email"`
+		Color          string `json:"color"`
+		ProfilePicture string `json:"profilePicture"`
+	} `json:"assigned_by"`
+	Reactions []interface{} `json:"reactions"`
+	Date      string        `json:"date"`
+}
+
 func (s *ListsService) Get(ctx context.Context, listID string, query string) (*List, *Response, error) {
 	req, err := s.client.NewRequest("GET", fmt.Sprintf("list/%s", listID), nil)
 	if err != nil {
@@ -96,6 +155,42 @@ func (s *ListsService) GetFolderlessLists(ctx context.Context, spaceID string, q
 	//fmt.Println(fmt.Sprintf("%+v", req))
 
 	wResp := new(ListsWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *ListsService) Members(ctx context.Context, listID string, query string) (*ListMembersWrapper, *Response, error) {
+
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("list/%s/member%s", listID, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(ListMembersWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *ListsService) Comments(ctx context.Context, listID string, query string) (*ListCommentsWrapper, *Response, error) {
+
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("list/%s/comment%s", listID, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(ListCommentsWrapper)
 	resp, err := s.client.Do(ctx, req, wResp)
 	if err != nil {
 		return nil, resp, err

@@ -38,6 +38,17 @@ type Space struct {
 	} `json:"members"`
 }
 
+type TagsWrapper struct {
+	Tags []Tag `json:"tags"`
+}
+
+type Tag struct {
+	Name            string `json:"name"`
+	ForegroundColor string `json:"tag_fg"`
+	BackgroundColor string `json:"tag_bg"`
+	Creator         int64  `json:"creator"`
+}
+
 func (s *SpacesService) Get(ctx context.Context, spaceID string, query string) (*Space, *Response, error) {
 	req, err := s.client.NewRequest("GET", fmt.Sprintf("space/%s", spaceID), nil)
 	if err != nil {
@@ -64,6 +75,23 @@ func (s *SpacesService) List(ctx context.Context, workspaceID string, query stri
 	//fmt.Println(fmt.Sprintf("%+v", req))
 
 	wResp := new(SpacesWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *SpacesService) Tags(ctx context.Context, spaceID string, query string) (*TagsWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("space/%s/tag%s", spaceID, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(TagsWrapper)
 	resp, err := s.client.Do(ctx, req, wResp)
 	if err != nil {
 		return nil, resp, err

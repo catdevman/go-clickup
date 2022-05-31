@@ -7,7 +7,6 @@ import (
 
 	"github.com/catdevman/go-clickup/clickup"
 	"golang.org/x/crypto/ssh/terminal"
-	"golang.org/x/oauth2"
 )
 
 func main() {
@@ -15,21 +14,16 @@ func main() {
 	byteToken, _ := terminal.ReadPassword(int(syscall.Stdin))
 	println()
 	token := string(byteToken)
-
 	ctx := context.Background()
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: token},
-	)
-	tc := oauth2.NewClient(ctx, ts)
+	pk := clickup.PersonalTokenTransport{PersonalToken: token}
 
-	client, _ := clickup.NewClient(tc)
+	client := clickup.NewClient(pk.Client())
 
-	workspaces, resp, err := client.Workspaces.Get(ctx)
+	l, _, err := client.Groups.Get(ctx, "")
 	if err != nil {
 		fmt.Printf("\nerror: %v\n", err)
 		return
 	}
 
-	fmt.Println(workspaces, resp)
-
+	fmt.Println(fmt.Sprintf("%+v", l))
 }

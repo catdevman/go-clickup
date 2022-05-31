@@ -56,6 +56,48 @@ type WorkspaceSeats struct {
 	} `json:"guests"`
 }
 
+type CustomRolesWrapper struct {
+	CustomRoles []CustomRole `json:"custom_roles"`
+}
+
+type CustomRole struct {
+	ID            int64   `json:"id"`
+	TeamID        string  `json:"team_id"`
+	InheritedRole int64   `json:"inherited_role"`
+	DateCreated   string  `json:"date_created"`
+	Members       []int64 `json:"members"`
+}
+
+type TaskTemplatesWrapper struct {
+	TaskTemplates []TaskTemplate `json:"templates"`
+}
+
+type TaskTemplate struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type WebhooksWrapper struct {
+	Webhooks []Webhook `json:"webhooks"`
+}
+
+type Webhook struct {
+	ID       string   `json:"id"`
+	UserId   int64    `json:"userid"`
+	TeamID   int64    `json:"team_id"`
+	Endpoint string   `json:"endpoint"`
+	ClientID string   `json:"client_id"`
+	Events   []string `json:"events"`
+	TaskID   string   `json:"task_id"`
+	ListID   string   `json:"list_id"`
+	SpaceID  string   `json:"space_id"`
+	Health   struct {
+		Status    string `json:"status"`
+		FailCount int64  `json:"fail_count"`
+	} `json:"health"`
+	Secret string `json:"secret"`
+}
+
 func (s *WorkspacesService) Get(ctx context.Context) (*WorkspacesWrapper, *Response, error) {
 	req, err := s.client.NewRequest("GET", "team", nil)
 	if err != nil {
@@ -82,6 +124,57 @@ func (s *WorkspacesService) GetSeats(ctx context.Context, workspaceId string) (*
 	//	fmt.Println(fmt.Sprintf("%+v", req))
 
 	wResp := new(WorkspaceSeats)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *WorkspacesService) CustomRoles(ctx context.Context, workspaceId string, query string) (*CustomRolesWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("team/%s/customroles%s", workspaceId, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//	fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(CustomRolesWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *WorkspacesService) TaskTemplates(ctx context.Context, workspaceId string, query string) (*TaskTemplatesWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("team/%s/taskTemplate%s", workspaceId, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//	fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(TaskTemplatesWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *WorkspacesService) Webhooks(ctx context.Context, workspaceId string, query string) (*WebhooksWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("team/%s/webhook%s", workspaceId, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//	fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(WebhooksWrapper)
 	resp, err := s.client.Do(ctx, req, wResp)
 	if err != nil {
 		return nil, resp, err
