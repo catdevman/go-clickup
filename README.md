@@ -7,21 +7,21 @@ TODOS
   - [x] List
   - [x] Get Workspace Seats (users, guests, etc...)
 - [ ] Spaces
-  - [ ] List
-  - [ ] Get
+  - [x] List
+  - [x] Get
   - [ ] Create
   - [ ] Update
   - [ ] Delete
 - [ ] Folders
-  - [ ] List
-  - [ ] Get
+  - [x] List
+  - [x] Get
   - [ ] Create
   - [ ] Update
   - [ ] Delete
 - [ ] Lists
-  - [ ] List (Foldered)
-  - [ ] List (Folderless)
-  - [ ] Get
+  - [x] List (Foldered)
+  - [x] List (Folderless)
+  - [x] Get
   - [ ] Create (Foldered)
   - [ ] Create (Folderless)
   - [ ] Update
@@ -29,17 +29,17 @@ TODOS
   - [ ] Add Task To List
   - [ ] Remove Task From List
 - [ ] Tasks
-  - [ ] List
-  - [ ] Get
+  - [x] List
+  - [x] Get
   - [ ] Create
   - [ ] Update
   - [ ] Delete
   - [ ] Filtered Team List
 - [ ] Members
-  - [ ] Get Task Members
-  - [ ] Get List Members
-- [ ] Custom Roles
-  - [ ] Get
+  - [x] Get Task Members
+  - [x] Get List Members
+- [x] Custom Roles
+  - [x] Get (on WorkspacesService)
 - [ ] Goals
   - [ ] List
   - [ ] Get
@@ -50,24 +50,24 @@ TODOS
   - [ ] Update Key Result
   - [ ] Delete Key Result
 - [ ] Tags
-  - [ ] Get
+  - [x] Get (on SpacesService)
   - [ ] Create
   - [ ] Update
   - [ ] Delete
-  - [ ] Add Tag To Tag
-  - [ ] Remove Tag To Tag
+  - [ ] Add Tag To Tasks
+  - [ ] Remove Tag To Tasks
 - [ ] Users
   - [ ] Invite User To Workspace
   - [ ] Update User On Workspace
   - [ ] Delete User From Workspace
   - [ ] Get User
 - [ ] Webhooks
-  - [ ] List
+  - [x] List (on WorkspacesService)
   - [ ] Create
   - [ ] Update
   - [ ] Delete
 - [ ] User Groups (Teams)
-  - [ ] List
+  - [x] List
   - [ ] Create
   - [ ] Update
   - [ ] Delete
@@ -89,3 +89,11 @@ TODOS
 - [ ] Checklists
 - [ ] Attachments
 - [ ] Comments
+  - [x] Get List Comments (on ListsService)
+  - [x] Get Task Comments (on TasksService)
+  - [ ] Get Chat View Comments
+  - [ ] Create List Comment
+  - [ ] Create Task Comment
+  - [ ] Create Chat View Comment
+  - [ ] Update
+  - [ ] Delete
