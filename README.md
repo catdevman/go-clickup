@@ -41,4 +41,51 @@ TODOS
 - [ ] Custom Roles
   - [ ] Get
 - [ ] Goals
-- [ ] 
+  - [ ] List
+  - [ ] Get
+  - [ ] Create
+  - [ ] Update
+  - [ ] Delete
+  - [ ] Create Key Result
+  - [ ] Update Key Result
+  - [ ] Delete Key Result
+- [ ] Tags
+  - [ ] Get
+  - [ ] Create
+  - [ ] Update
+  - [ ] Delete
+  - [ ] Add Tag To Tag
+  - [ ] Remove Tag To Tag
+- [ ] Users
+  - [ ] Invite User To Workspace
+  - [ ] Update User On Workspace
+  - [ ] Delete User From Workspace
+  - [ ] Get User
+- [ ] Webhooks
+  - [ ] List
+  - [ ] Create
+  - [ ] Update
+  - [ ] Delete
+- [ ] User Groups (Teams)
+  - [ ] List
+  - [ ] Create
+  - [ ] Update
+  - [ ] Delete
+- [ ] Time Tracking Legacy
+  - [ ] Get
+  - [ ] Create
+  - [ ] Update
+  - [ ] Delete
+- [ ] Time Tracking 2.0
+  - [ ] Get Time Entries Within a Date Range
+  - [ ] Get Singular Time Entry
+  - [ ] Get Time Entry History
+  - [ ] Get Running Time Entry
+  - [ ] Get All Tags From Time Entries
+- [ ] Task Templates
+- [ ] Shared Hierarchy
+- [ ] Guests
+- [ ] Custom Fields
+- [ ] Checklists
+- [ ] Attachments
+- [ ] Comments
