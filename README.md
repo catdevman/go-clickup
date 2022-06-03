@@ -83,11 +83,34 @@ TODOS
   - [ ] Get Running Time Entry
   - [ ] Get All Tags From Time Entries
 - [ ] Task Templates
+  - [ ] Get
+  - [ ] Create
 - [ ] Shared Hierarchy
+  - [ ] Get
 - [ ] Guests
+  - [ ] Get Guest
+  - [ ] Invite Guest To Workspace
+  - [ ] Edit Guest On Workspace
+  - [ ] Remove Guest From Workspace
+  - [ ] Add Guest To Task
+  - [ ] Add Guest To List
+  - [ ] Add Guest To Folder
+  - [ ] Remove Guest From Task
+  - [ ] Remove Guest From List
+  - [ ] Remove Guest From Folder
 - [ ] Custom Fields
+  - [ ] Get
+  - [ ] Set Custom Field Value
+  - [ ] Delete Custom Field Value
 - [ ] Checklists
+  - [ ] Create
+  - [ ] Create Checklist Item
+  - [ ] Update
+  - [ ] Update Checklist Item
+  - [ ] Delete
+  - [ ] Delete Checklist Item
 - [ ] Attachments
+  - [ ] Create
 - [ ] Comments
   - [x] Get List Comments (on ListsService)
   - [x] Get Task Comments (on TasksService)
@@ -97,3 +120,6 @@ TODOS
   - [ ] Create Chat View Comment
   - [ ] Update
   - [ ] Delete
+- [ ] Examples
+  - [ ] Concurrency
+     - [ ] Tasks
