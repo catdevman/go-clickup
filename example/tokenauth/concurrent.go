@@ -33,7 +33,7 @@ func main() {
 		wg.Add(1)
 		go func(page int) {
 			fmt.Println("Before API call for page", page)
-			ts, _, err := client.Tasks.ForTeam(ctx, "", fmt.Sprintf("?page=%d", page))
+			ts, _, err := client.Tasks.ForTeam(ctx, "<WORKSPACE ID>", fmt.Sprintf("?page=%d", page))
 			if err != nil {
 				fmt.Printf("\nerror: %v\n", err)
 				wg.Done()
