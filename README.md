@@ -83,10 +83,10 @@ TODOS
   - [ ] Get Running Time Entry
   - [ ] Get All Tags From Time Entries
 - [ ] Task Templates
-  - [ ] Get
+  - [x] Get
   - [ ] Create
-- [ ] Shared Hierarchy
-  - [ ] Get
+- [x] Shared Hierarchy
+  - [x] Get
 - [ ] Guests
   - [ ] Get Guest
   - [ ] Invite Guest To Workspace
@@ -120,6 +120,16 @@ TODOS
   - [ ] Create Chat View Comment
   - [ ] Update
   - [ ] Delete
-- [ ] Examples
-  - [ ] Concurrency
-     - [ ] Tasks
+- [ ] Views
+  - [x] Get Team Views
+  - [x] Get Space Views
+  - [x] Get Folder Views
+  - [x] Get List Views
+  - [ ] Get View
+  - [ ] Get View Tasks
+  - [ ] Create Team View
+  - [ ] Create Space View
+  - [ ] Create Folder View
+  - [ ] Create List View
+  - [ ] Update
+  - [ ] Delete

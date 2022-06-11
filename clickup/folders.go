@@ -89,3 +89,20 @@ func (s *FoldersService) List(ctx context.Context, spaceID string, query string)
 
 	return wResp, resp, nil
 }
+
+func (s *FoldersService) Views(ctx context.Context, folderID string, query string) (*ViewsWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("folder/%s/view%s", folderID, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(ViewsWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}

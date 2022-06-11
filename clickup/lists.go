@@ -198,3 +198,20 @@ func (s *ListsService) Comments(ctx context.Context, listID string, query string
 
 	return wResp, resp, nil
 }
+
+func (s *ListsService) Views(ctx context.Context, listID string, query string) (*ViewsWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("list/%s/view%s", listID, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(ViewsWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}

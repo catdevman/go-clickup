@@ -98,6 +98,34 @@ type Webhook struct {
 	Secret string `json:"secret"`
 }
 
+type SharedHierarchy struct {
+	Shared struct {
+		Tasks []interface{} `json:"tasks"`
+		Lists []struct {
+			ID         string      `json:"id"`
+			Name       string      `json:"name"`
+			OrderIndex int32       `json:"orderindex"`
+			Content    string      `json:"content"`
+			Status     string      `json:"status"`
+			Priority   string      `json:"priority"`
+			Assignee   interface{} `json:"assignee"`
+			TaskCount  string      `json:"task_count"`
+			DueDate    string      `json:"due_date"`
+			StartDate  string      `json:"start_date"`
+			Archived   bool        `json:"archived"`
+		} `json:"lists"`
+		Folders []struct {
+			ID         string `json:"id"`
+			Name       string `json:"name"`
+			OrderIndex int32  `json:"orderindex"`
+			Content    string `json:"content"`
+			TaskCount  string `json:"task_count"`
+			DueDate    string `json:"due_date"`
+			Archived   bool   `json:"archived"`
+		} `json:"folders"`
+	} `json:"shared"`
+}
+
 func (s *WorkspacesService) Get(ctx context.Context) (*WorkspacesWrapper, *Response, error) {
 	req, err := s.client.NewRequest("GET", "team", nil)
 	if err != nil {
@@ -175,6 +203,40 @@ func (s *WorkspacesService) Webhooks(ctx context.Context, workspaceId string, qu
 	//	fmt.Println(fmt.Sprintf("%+v", req))
 
 	wResp := new(WebhooksWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *WorkspacesService) SharedHierarchy(ctx context.Context, workspaceId string, query string) (*SharedHierarchy, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("team/%s/shared%s", workspaceId, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//	fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(SharedHierarchy)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+}
+
+func (s *WorkspacesService) Views(ctx context.Context, workspaceID string, query string) (*ViewsWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("team/%s/view%s", workspaceID, query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(ViewsWrapper)
 	resp, err := s.client.Do(ctx, req, wResp)
 	if err != nil {
 		return nil, resp, err
