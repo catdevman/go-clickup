@@ -125,8 +125,8 @@ TODOS
   - [x] Get Space Views
   - [x] Get Folder Views
   - [x] Get List Views
-  - [ ] Get View
-  - [ ] Get View Tasks
+  - [x] Get View
+  - [x] Get View Tasks
   - [ ] Create Team View
   - [ ] Create Space View
   - [ ] Create Folder View
