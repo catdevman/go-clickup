@@ -114,7 +114,7 @@ TODOS
 - [ ] Comments
   - [x] Get List Comments (on ListsService)
   - [x] Get Task Comments (on TasksService)
-  - [ ] Get Chat View Comments
+  - [x] Get Chat View Comments
   - [ ] Create List Comment
   - [ ] Create Task Comment
   - [ ] Create Chat View Comment

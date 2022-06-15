@@ -61,6 +61,29 @@ type ViewsWrapper struct {
 	Views []View `json:"views"`
 }
 
+type ChatViewCommentsWrapper struct {
+	Comments []ChatViewComment `json:"comments"`
+}
+
+type ChatViewComment struct {
+	ID          string        `json:"id"`
+	Comment     []interface{} `json:"comment"`
+	CommentText string        `json:"comment_text"`
+	User        struct {
+		ID             int64  `json:"id"`
+		Username       string `json:"username"`
+		Initials       string `json:"initials"`
+		Email          string `json:"email"`
+		Color          string `json:"color"`
+		ProfilePicture string `json:"profilePicture"`
+	} `json:"user"`
+	Resolved   bool          `json:"resolved"`
+	Assignee   interface{}   `json:"assignee"`
+	AssignedBy interface{}   `json:"assigned_by"`
+	Reactions  []interface{} `json:"reactions"`
+	Date       string        `json:"date"`
+}
+
 func (s *ViewsService) Get(ctx context.Context, viewID string, query string) (*ViewWrapper, *Response, error) {
 	req, err := s.client.NewRequest("GET", fmt.Sprintf("view/%s%s", query), nil)
 	if err != nil {
@@ -76,7 +99,6 @@ func (s *ViewsService) Get(ctx context.Context, viewID string, query string) (*V
 	}
 
 	return wResp, resp, nil
-
 }
 
 func (s *ViewsService) Tasks(ctx context.Context, viewID string, query string) (*TasksWrapper, *Response, error) {
@@ -94,5 +116,21 @@ func (s *ViewsService) Tasks(ctx context.Context, viewID string, query string) (
 	}
 
 	return wResp, resp, nil
+}
 
+func (s *ViewsService) Comments(ctx context.Context, viewID string, query string) (*ChatViewCommentsWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("view/%s/comment%s", query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(ChatViewCommentsWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
 }
