@@ -55,6 +55,7 @@ type Client struct {
 	Lists      *ListsService
 	Tasks      *TasksService
 	Groups     *GroupsService
+	Goals      *GoalsService
 }
 
 type service struct {
@@ -125,6 +126,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.Lists = (*ListsService)(&c.common)
 	c.Tasks = (*TasksService)(&c.common)
 	c.Groups = (*GroupsService)(&c.common)
+	c.Goals = (*GoalsService)(&c.common)
 	return c
 }
 

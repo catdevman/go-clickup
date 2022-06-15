@@ -41,8 +41,8 @@ TODOS
 - [x] Custom Roles
   - [x] Get (on WorkspacesService)
 - [ ] Goals
-  - [ ] List
-  - [ ] Get
+  - [x] List
+  - [x] Get
   - [ ] Create
   - [ ] Update
   - [ ] Delete
