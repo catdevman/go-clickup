@@ -1,8 +1,23 @@
 package clickup
 
+import (
+	"context"
+	"fmt"
+)
+
+type ViewsService service
+
+type ViewWrapper struct {
+	View View `json:"view"`
+}
+
 type View struct {
-	Name     string `json:"name"`
-	Type     string `json:"type"`
+	Name   string `json:"name"`
+	Type   string `json:"type"`
+	Parent struct {
+		ID   string `json:"id"`
+		Type int64  `json:"type"`
+	} `json:"parent"`
 	Grouping struct {
 		Field     string        `json:"field"`
 		Dir       int32         `json:"dir"`
@@ -44,4 +59,40 @@ type View struct {
 
 type ViewsWrapper struct {
 	Views []View `json:"views"`
+}
+
+func (s *ViewsService) Get(ctx context.Context, viewID string, query string) (*ViewWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("view/%s%s", query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(ViewWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+
+}
+
+func (s *ViewsService) Tasks(ctx context.Context, viewID string, query string) (*TasksWrapper, *Response, error) {
+	req, err := s.client.NewRequest("GET", fmt.Sprintf("view/%s/task%s", query), nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	//fmt.Println(fmt.Sprintf("%+v", req))
+
+	wResp := new(TasksWrapper)
+	resp, err := s.client.Do(ctx, req, wResp)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wResp, resp, nil
+
 }
